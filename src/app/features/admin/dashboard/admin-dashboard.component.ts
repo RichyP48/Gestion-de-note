@@ -6,89 +6,17 @@ import { AdminUserService } from '../../../core/services/admin-user.service';
 import { SubjectService, Subject } from '../../../core/services/subject.service';
 import { UserProfile } from '../../../core/services/user.service';
 import { AuthService } from '../../../auth/auth.service';
-import { ClickOutsideDirective } from '../../../shared/directives/click-outside.directive';
+
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, ClickOutsideDirective],
+  imports: [CommonModule, RouterModule],
   template: `
-    <div class="min-h-screen bg-[#f6f6f6] text-[#3d3d3d] flex">
-  <aside class="w-56 bg-gradient-to-t from-[#2dd4bf] to-[#1f2937] text-white flex flex-col py-6 px-4 min-h-screen fixed top-0">
-    <div class="mb-8 flex items-center gap-2">
-      <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-[#2dd4bf]">Grade48</span>
-    </div>
-    <nav class="flex-1">
-      <ul class="space-y-2">
-        <li>
-          <a routerLink="/admin/dashboard" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-            <span>🏠</span> <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/admin/users" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-            <span>🧑‍🤝‍🧑</span> <span>Users</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/admin/subjects" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-            <span>📚</span> <span>Subjects</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/admin/reports" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-            <span>📝</span> <span>Reports</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/admin/settings" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-            <span>⚙️</span> <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div class="mt-auto">
-      <button (click)="logout()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-[#2dd4bf] hover:bg-[#09998680] transition-colors font-medium">
-        <span>🚪</span> <span>Logout</span>
-      </button>
-    </div>
-  </aside>
-  <div class="flex-1 flex flex-col min-h-screen">
-    <nav class="bg-white border-b border-indigo-100 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex items-center">
-            <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#2dd4bf] to-[#087062]">Grade48</span>
-          </div>
-          <div class="flex items-center space-x-4">
-            <button class="px-4 py-2 rounded-md bg-[#2dd4bf] text-white hover:bg-[#40eed7cc] transition-all">
-              <span>Settings</span>
-            </button>
-            <div class="relative" clickOutside (clickOutside)="showProfileMenu = false">
-              <button (click)="toggleProfileMenu()" class="relative h-10 w-10 rounded-full bg-[#2dd4bf] overflow-hidden">
-                <span class="absolute inset-0 flex items-center justify-center font-bold text-xl text-white">A</span>
-              </button>
-              
-              <div *ngIf="showProfileMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 text-gray-800 border border-indigo-100 animate-fadeIn">
-                <div class="px-4 py-2 border-b border-gray-200">
-                  <p class="text-sm font-medium">Admin User</p>
-                  <p class="text-xs text-gray-500">admin&#64;school.edu</p>
-                </div>
-                <a routerLink="/admin/profile" class="block px-4 py-2 text-sm hover:bg-indigo-100 transition-all">Your Profile</a>
-                <div class="border-t border-gray-200"></div>
-                <a (click)="logout()" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-all cursor-pointer">Logout</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-    
-    <main class="py-10 flex-1">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="p-6">
         <header class="mb-10">
           <h1 class="text-4xl font-black mb-2 animate-fadeIn">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-emerald-400">Admin Dashboard</span>
+            <span class="bg-clip-text text-primary-900 ">Admin Dashboard</span>
           </h1>
           <p class="text-gray-500 animate-slideRight">Welcome to your command center. Manage everything from here.</p>
         </header>
@@ -118,7 +46,17 @@ import { ClickOutsideDirective } from '../../../shared/directives/click-outside.
                     i === 2 ? 'bg-amber-500/20' : '',
                     i === 3 ? 'bg-pink-500/20' : ''
                   ]">
-                    <span class="text-lg">{{ stat.icon }}</span>
+                    <svg class="w-6 h-6" [ngClass]="[
+                      i === 0 ? 'text-blue-600' : '',
+                      i === 1 ? 'text-emerald-600' : '',
+                      i === 2 ? 'text-amber-600' : '',
+                      i === 3 ? 'text-pink-600' : ''
+                    ]" fill="currentColor" viewBox="0 0 24 24">
+                      <path *ngIf="i === 0" d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                      <path *ngIf="i === 1" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                      <path *ngIf="i === 2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                      <path *ngIf="i === 3" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
                   </div>
                 </div>
                 <div>
@@ -148,7 +86,15 @@ import { ClickOutsideDirective } from '../../../shared/directives/click-outside.
                 i === 1 ? 'bg-cyan-600/30' : '',
                 i === 2 ? 'bg-rose-600/30' : ''
               ]">
-                <span class="text-xl">{{ action.icon }}</span>
+                <svg class="w-6 h-6" [ngClass]="[
+                  i === 0 ? 'text-violet-600' : '',
+                  i === 1 ? 'text-cyan-600' : '',
+                  i === 2 ? 'text-rose-600' : ''
+                ]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path *ngIf="i === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  <path *ngIf="i === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                  <path *ngIf="i === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
               </div>
               <span class="text-xs text-gray-400">{{ action.time }}</span>
             </div>
@@ -180,10 +126,14 @@ import { ClickOutsideDirective } from '../../../shared/directives/click-outside.
                 </div>
                 <div class="flex space-x-2">
                   <button class="p-2 rounded-full bg-indigo-600/20 hover:bg-indigo-600/40 text-xs transition-colors">
-                    <span>✏️</span>
+                    <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
                   </button>
                   <button class="p-2 rounded-full bg-rose-600/20 hover:bg-rose-600/40 text-xs transition-colors">
-                    <span>🗑️</span>
+                    <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -206,10 +156,7 @@ import { ClickOutsideDirective } from '../../../shared/directives/click-outside.
             </div>
           </div>
         </div>
-      </div>
-    </main>
-  </div>
-</div>
+    </div>
   `,
 
   styles: [`
@@ -247,7 +194,7 @@ import { ClickOutsideDirective } from '../../../shared/directives/click-outside.
 })
 export class AdminDashboardComponent implements OnInit {
   statsCards = [
-    { title: 'Total Students', value: '458', trend: 12, icon: '👨‍🎓' },
+    { title: 'Total Students', value: '458', trend: 12, icon: '👨🎓' },
     { title: 'Average GPA', value: '3.6', trend: 5.4, icon: '📊' },
     { title: 'Total Classes', value: '32', trend: 0, icon: '🏫' },
     { title: 'Passing Rate', value: '94%', trend: -2.1, icon: '📈' }
@@ -263,7 +210,7 @@ export class AdminDashboardComponent implements OnInit {
       route: '/admin/reports'
     },
     {
-      icon: '🧑‍🤝‍🧑',
+      icon: '🧑🤝🧑',
       title: 'Manage Users',
       description: 'Add, update, or remove students and teachers',
       time: 'Last update: Today',
@@ -293,12 +240,10 @@ export class AdminDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Fetch real data from the server
     this.loadRealData();
   }
 
   private loadMockData(): void {
-    // Mock user data
     this.recentUsers = [
       { id: 1, username: 'john_doe', firstName: 'John', lastName: 'Doe', email: 'john@example.com', role: 'STUDENT' },
       { id: 2, username: 'mary_smith', firstName: 'Mary', lastName: 'Smith', email: 'mary@example.com', role: 'TEACHER' },
@@ -306,7 +251,6 @@ export class AdminDashboardComponent implements OnInit {
       { id: 4, username: 'laura_wilson', firstName: 'Laura', lastName: 'Wilson', email: 'laura@example.com', role: 'TEACHER' }
     ];
 
-    // Mock subject data
     this.subjects = [
       { id: 1, name: 'Mathematics', coefficient: 2 },
       { id: 2, name: 'Physics', coefficient: 2 },
@@ -316,16 +260,12 @@ export class AdminDashboardComponent implements OnInit {
     ];
   }
 
-  // Fetch real data from the server
   private loadRealData(): void {
-    // Add error handling for API requests
     const handleError = (error: any) => {
       console.error('Error fetching data:', error);
-      // Fallback to mock data if server is not available
       this.loadMockData();
     };
 
-    // Get recent users
     this.adminUserService.getAllUsers().subscribe({
       next: (users) => {
         this.recentUsers = users.slice(0, 4);
@@ -333,7 +273,6 @@ export class AdminDashboardComponent implements OnInit {
       error: handleError
     });
 
-    // Get subjects
     this.subjectService.getAllSubjects().subscribe({
       next: (subjects) => {
         this.subjects = subjects;
@@ -341,16 +280,14 @@ export class AdminDashboardComponent implements OnInit {
       error: handleError
     });
 
-    // Get statistics and update stats cards
     this.statisticsService.getOverallStatistics().subscribe({
       next: (stats) => {
-        // Update stats cards with real data
         this.statsCards = [
           { 
             title: 'Total Students', 
             value: stats.totalStudents.toString(), 
             trend: this.calculateTrend(stats.totalStudents), 
-            icon: '👨‍🎓' 
+            icon: '👨🎓' 
           },
           { 
             title: 'Average GPA', 
@@ -361,7 +298,7 @@ export class AdminDashboardComponent implements OnInit {
           { 
             title: 'Total Classes', 
             value: stats.totalSubjects.toString(), 
-            trend: 0, // Assuming classes don't change frequently
+            trend: 0, 
             icon: '🏫' 
           },
           { 
@@ -376,20 +313,15 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  // Helper method to calculate trend percentage (mock calculation for demo)
   private calculateTrend(currentValue: number, variationFactor: number = 5): number {
-    // This is a simplified mock calculation
-    // In a real app, you would compare with historical data
     const randomVariation = (Math.random() * 2 - 1) * variationFactor;
     return parseFloat(randomVariation.toFixed(1));
   }
   
-  // Toggle profile dropdown menu
   toggleProfileMenu(): void {
     this.showProfileMenu = !this.showProfileMenu;
   }
   
-  // Handle user logout
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

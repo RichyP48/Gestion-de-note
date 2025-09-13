@@ -28,45 +28,31 @@ interface Semester {
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 text-white">
+    <div class="min-h-screen bg-white text-primary-500">
       <!-- Navbar -->
-      <nav class="bg-black/30 backdrop-blur-lg border-b border-indigo-500/30 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex items-center">
-              <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
-                Quantum Grade Systems</span>
-            </div>
-            <div class="flex items-center space-x-4">
-              <button class="px-4 py-2 rounded-md bg-indigo-700 hover:bg-indigo-600 transition-all">
-                <span>Settings</span>
-              </button>
-              <button class="relative h-10 w-10 rounded-full bg-indigo-600 overflow-hidden">
-                <span class="absolute inset-0 flex items-center justify-center font-bold text-xl">A</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+  
 
       <!-- Main Content -->
       <main class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Header with animation -->
           <header class="mb-10">
-            <h1 class="text-4xl font-black mb-2 animate-fadeIn">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-emerald-400">Report Generation</span>
+              <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                 <h1 class="text-4xl font-black mb-2 animate-fadeIn">
+              <span class="bg-clip-text text-primary-900 ">Report Generation</span>
             </h1>
-            <p class="text-gray-300 animate-slideRight">Generate detailed PDF reports for students, classes, and semesters.</p>
+            <p class=" animate-slideRight">Generate detailed PDF reports for students, classes, and semesters.</p>
+              </div>
+           
           </header>
 
           <!-- Report Generation Options -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div class="  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             <div *ngFor="let option of reportOptions; let i = index" 
-                class="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-6 transform transition-all duration-300 hover:scale-102 hover:bg-white/10 cursor-pointer animate-fadeIn"
+                class="backdrop-blur-md shadow-md bg-white  border border-gray-200  rounded-xl p-6 transform transition-all duration-300 hover:scale-102 hover:bg-white/10 cursor-pointer animate-fadeIn"
                 [style.animation-delay]="(i * 0.1) + 's'"
                 (click)="selectReportType(option.type)">
-              <div class="flex items-center justify-between mb-4">
+              <div class=" flex items-center justify-between mb-4">
                 <div [ngClass]="[
                   'p-3 rounded-xl',
                   i === 0 ? 'bg-blue-600/30' : '',
@@ -74,25 +60,38 @@ interface Semester {
                   i === 2 ? 'bg-green-600/30' : '',
                   i === 3 ? 'bg-amber-600/30' : ''
                 ]">
-                  <span class="text-2xl">{{ option.icon }}</span>
+                  <ng-container [ngSwitch]="option.type">
+  
+                    <svg *ngSwitchCase="'student'" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
+                    <svg *ngSwitchCase="'bulk'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M16 11c1.7 0 3-1.3 3-3S17.7 5 16 5s-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.3 0-7 1.2-7 3.5V20h14v-3.5C15 14.2 10.3 13 8 13zm8 0c-.3 0-.7 0-1 .1 1.2.9 2 2.2 2 3.4V20h6v-3.5c0-2.3-4.7-3.5-7-3.5z"/>
+                    </svg>
+                    <svg *ngSwitchCase="'class'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M4 6h16v2H4zm0 4h10v2H4zm0 4h10v2H4zm12 0h4v6h-4z"/>
+                    </svg>
+                    <svg *ngSwitchCase="'semester'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                    </svg>
+                  </ng-container>
+
                 </div>
                 <div *ngIf="selectedReportType === option.type" class="h-3 w-3 rounded-full bg-green-400 animate-pulse"></div>
               </div>
               <h3 class="text-lg font-semibold mb-1">{{ option.title }}</h3>
-              <p class="text-gray-400 text-sm">{{ option.description }}</p>
+              <p class="text-primary-700 text-sm">{{ option.description }}</p>
             </div>
           </div>
 
           <!-- Report Configuration -->
           <div class="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-6 mb-10 animate-fadeIn" style="animation-delay: 0.4s">
-            <h2 class="text-xl font-bold mb-6">{{ getReportTypeTitle() }}</h2>
+            <h2 class="text-xl  font-bold mb-6">{{ getReportTypeTitle() }}</h2>
 
             <!-- Student Report Form -->
-            <form *ngIf="selectedReportType === 'student'" [formGroup]="studentReportForm" (ngSubmit)="generateStudentReport()" class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+            <form *ngIf="selectedReportType === 'student'" [formGroup]="studentReportForm" (ngSubmit)="generateStudentReport()" class="flex  space-y-6">
+              <div class="w-1/2  md:grid-cols-2 gap-6">
+                <div class=" w-full">
                   <label class="block text-sm font-medium text-gray-300 mb-1">Select Student</label>
-                  <select formControlName="studentId" class="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2 text-white">
+                  <select formControlName="studentId" class="w-full bg-primary-600 border h-12 rounded-md px-3 py-2 text-white">
                     <option value="">Select a student</option>
                     <option *ngFor="let student of students" [value]="student.id">{{ student.firstName }} {{ student.lastName }}</option>
                   </select>
@@ -101,13 +100,16 @@ interface Semester {
                   </div>
                 </div>
               </div>
-              <div class="flex justify-end">
+              <div class="w-1/2 flex justify-end items-center">
                 <button 
                   type="submit"
                   [disabled]="studentReportForm.invalid || isProcessing"
                   [ngClass]="{'opacity-50 cursor-not-allowed': studentReportForm.invalid || isProcessing}"
-                  class="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition-colors flex items-center gap-2">
-                  <span *ngIf="isProcessing" class="animate-spin">🔄</span>
+                  class="text-white h-12 px-6 py-2 rounded-md bg-primary-600 opacity-75 hover:bg-primary-500 transition-colors flex items-center gap-2">
+                  <svg *ngIf="isProcessing" class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
                   <span>Generate Report</span>
                 </button>
               </div>
@@ -124,7 +126,7 @@ interface Semester {
                       [id]="'student-' + student.id"
                       [value]="student.id"
                       (change)="toggleStudentSelection($event, student.id)"
-                      class="mr-2 h-4 w-4 accent-indigo-600">
+                      class="mr-2 h-4 w-4 accent-primary-600">
                     <label [for]="'student-' + student.id" class="text-sm cursor-pointer">{{ student.firstName }} {{ student.lastName }}</label>
                   </div>
                 </div>
@@ -138,8 +140,11 @@ interface Semester {
                   type="submit"
                   [disabled]="selectedStudents.length === 0 || isProcessing"
                   [ngClass]="{'opacity-50 cursor-not-allowed': selectedStudents.length === 0 || isProcessing}"
-                  class="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition-colors flex items-center gap-2">
-                  <span *ngIf="isProcessing" class="animate-spin">🔄</span>
+                  class="px-6 py-2 rounded-lg bg-primary-600 hover:bg-primary-500 transition-colors flex items-center gap-2">
+                  <svg *ngIf="isProcessing" class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
                   <span>Generate Bulk Reports</span>
                 </button>
               </div>
@@ -191,7 +196,7 @@ interface Semester {
                   [disabled]="semesterReportForm.invalid || isProcessing"
                   [ngClass]="{'opacity-50 cursor-not-allowed': semesterReportForm.invalid || isProcessing}"
                   class="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition-colors flex items-center gap-2">
-                  <span *ngIf="isProcessing" class="animate-spin">🔄</span>
+                  <span *ngIf="isProcessing" class="animate-spin"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-loader-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 0 0 9 9a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9" /><path d="M17 12a5 5 0 1 0 -5 5" /></svg></span>
                   <span>Generate Semester Report</span>
                 </button>
               </div>
@@ -202,7 +207,7 @@ interface Semester {
           <div class="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl p-6 animate-fadeIn" style="animation-delay: 0.5s">
             <div class="flex justify-between items-center mb-6">
               <h2 class="text-xl font-bold">Recent Reports</h2>
-              <button class="text-xs bg-indigo-700/50 hover:bg-indigo-700/70 px-3 py-1 rounded-full transition-colors">
+              <button class="text-xs bg-primary-700 bg-opacity-50 hover:bg-primary-700 hover:bg-opacity-70 text-white px-3 py-1 rounded-full transition-colors">
                 Clear History
               </button>
             </div>
@@ -213,7 +218,7 @@ interface Semester {
               </div>
               <div *ngFor="let report of recentReports" class="flex items-center justify-between p-4 bg-black/20 rounded-lg border border-white/5">
                 <div class="flex items-center">
-                  <div class="p-2 rounded-md bg-indigo-600/20 mr-4">
+                  <div class="p-2 rounded-md bg-primary-600 bg-opacity-20 mr-4">
                     <span class="text-xl">📄</span>
                   </div>
                   <div>
@@ -221,8 +226,10 @@ interface Semester {
                     <p class="text-xs text-gray-400">{{ report.date | date:'medium' }}</p>
                   </div>
                 </div>
-                <button class="p-2 rounded-full bg-indigo-600/20 hover:bg-indigo-600/40 transition-colors">
-                  <span>⬇️</span>
+                <button class="p-2 rounded-full bg-primary-600 bg-opacity-20 hover:bg-primary-600 bg-opacity-40 transition-colors">
+                  <span>
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-download text-white"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+                  </span>
                 </button>
               </div>
             </div>

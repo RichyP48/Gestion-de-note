@@ -10,96 +10,42 @@ import { UserProfile } from '../../../core/services/user.service';
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   template: `
    <div class="min-h-screen bg-white text-gray-900 flex">
-    <!-- Sidebar -->
-    <aside class="w-56 bg-gradient-to-t from-[#2dd4bf] to-[#1f2937] text-white flex flex-col py-6 px-4 z-[500] h-screen fixed top-0">
-      <div class="mb-8 flex items-center gap-2">
-        <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-[#2dd4bf]">Grade48</span>
-      </div>
-      <nav class="flex-1">
-        <ul class="space-y-2">
-          <li>
-            <a routerLink="/admin/dashboard" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-              <span>🏠</span> <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/users" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#2dd4bf] font-semibold transition-colors">
-              <span>🧑‍🤝‍🧑</span> <span>Users</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/subjects" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-              <span>📚</span> <span>Subjects</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/reports" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-              <span>📝</span> <span>Reports</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/settings" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#2dd4bf] transition-colors font-medium">
-              <span>⚙️</span> <span>Settings</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="mt-auto">
-        <button (click)="logout()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 transition-colors font-medium">
-          <span>🚪</span> <span>Logout</span>
-        </button>
-      </div>
-    </aside>
+
     <!-- Main Content Wrapper -->
     <div class="flex-1 flex flex-col min-h-screen">
       <!-- Navbar -->
-      <nav class="bg-white border-b border-indigo-100 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex items-center">
-             
-            </div>
-            <div class="flex items-center space-x-4">
-              <button class="px-4 py-2 rounded-md bg-[#2dd4bf] text-white hover:bg-[#2dd4bf] transition-all">
-                <span>Settings</span>
-              </button>
-              <button class="relative h-10 w-10 rounded-full bg-[#2dd4bf] overflow-hidden">
-                <span class="absolute inset-0 flex items-center justify-center font-bold text-xl text-white">A</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+
 
       <!-- Main Content -->
       <main class="py-10 flex-1">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class=" mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Header with animation -->
           <header class="mb-10">
             <h1 class="text-4xl font-black mb-2 animate-fadeIn">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-emerald-400">User Management</span>
+              <span class="bg-clip-text text-primary-900">User Management</span>
             </h1>
             <p class="text-gray-500 animate-slideRight">Add, update, and remove users from the system.</p>
           </header>
 
           <!-- Control Panel -->
-          <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+          <div class="flex flex-col gap-6 mb-8">
             <!-- Filters -->
-            <div class="lg:col-span-1 backdrop-blur-md bg-gray-50 border border-gray-200 rounded-xl p-6">
+            <div class="lg:col-span-1 backdrop-blur-md bg-gray-50 border border-gray-200 rounded-xl p-6  group transition-all duration-200 ">
               <h2 class="text-xl font-bold mb-4 text-gray-900">Filters</h2>
-              <div class="space-y-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+              <div class=" flex justify-between space-y-4">
+                <div class="flex gap-2 w-1/2">
+                <div class="w-full">
+                  <label class="block text-sm  font-medium text-gray-700 mb-1">Role</label>
                   <select 
                     (change)="filterUsers($event)" 
-                    class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900">
+                    class="w-full bg-white border border-gray-200 rounded-lg px-3 mb-2 py-2 text-gray-900">
                     <option value="">All Roles</option>
                     <option value="ADMIN">Admin</option>
                     <option value="TEACHER">Teacher</option>
                     <option value="STUDENT">Student</option>
                   </select>
                 </div>
-                <div>
+                <div class="w-full">
                   <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                   <input 
                     type="text" 
@@ -107,19 +53,34 @@ import { UserProfile } from '../../../core/services/user.service';
                     class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900"
                     (input)="searchUsers($event)">
                 </div>
-              </div>
-              
-              <!-- Add User Button -->
-              <div class="mt-6">
+                </div>
+                 <div class="mt-6">
                 <button 
                   (click)="showAddUserForm = true" 
-                  class="w-full py-2 rounded-lg bg-[#2dd4bf] text-white hover:bg-[#046b5d] transition-colors">
+                  class="w-full cursor-pointer py-2 px-3 rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors">
                   <span class="flex items-center justify-center gap-2">
-                    <span>➕</span>
+                    <span><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="12" y1="5" x2="12" y2="19"></line>
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg></span>
                     <span>Add New User</span>
                   </span>
                 </button>
               </div>
+              </div>
+              
+              <!-- Add User Button -->
+             
             </div>
 
             <!-- User List -->
@@ -128,7 +89,7 @@ import { UserProfile } from '../../../core/services/user.service';
               
               <!-- User Table -->
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="min-w-full divide-y animate-staggered-fade-in divide-gray-200">
                   <thead>
                     <tr>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Name</th>
@@ -138,7 +99,7 @@ import { UserProfile } from '../../../core/services/user.service';
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-gray-200">
+                  <tbody class="divide-y divide-gray-200  group transition-all duration-200">
                     <tr *ngFor="let user of filteredUsers" class="hover:bg-gray-100">
                       <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
@@ -164,11 +125,11 @@ import { UserProfile } from '../../../core/services/user.service';
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div class="flex space-x-2">
-                          <button (click)="editUser(user)" class="text-indigo-600 hover:text-indigo-400 transition-colors">
-                            <span>✏️</span>
+                          <button (click)="editUser(user)" class="text-primary-500 hover:text-priamry-400 transition-colors">
+                            <span><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg></span>
                           </button>
                           <button (click)="confirmDeleteUser(user)" class="text-rose-600 hover:text-rose-400 transition-colors">
-                            <span>🗑️</span>
+                            <span><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></span>
                           </button>
                         </div>
                       </td>
@@ -188,7 +149,7 @@ import { UserProfile } from '../../../core/services/user.service';
               <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-gray-900">Add New User</h3>
                 <button (click)="showAddUserForm = false" class="text-gray-400 hover:text-gray-700 transition-colors">
-                  <span>❌</span>
+                  <span><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></span>
                 </button>
               </div>
               
@@ -286,7 +247,7 @@ import { UserProfile } from '../../../core/services/user.service';
           <div *ngIf="userToDelete" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md border border-gray-200">
               <div class="text-center">
-                <div class="mb-4 text-4xl">⚠️</div>
+                <div class="mb-4 text-4xl"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-alert-triangle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z" /></svg></div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Confirm Deletion</h3>
                 <p class="text-gray-700 mb-6">Are you sure you want to delete {{ userToDelete.firstName }} {{ userToDelete.lastName }}? This action cannot be undone.</p>
                 

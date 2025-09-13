@@ -12,71 +12,11 @@ import { ClassService, Class, User } from '../../../core/services/class.service'
 template: `
   <div class="min-h-screen flex bg-white">
     <!-- Sidebar -->
-    <aside class="w-60 bg-gradient-to-r from-[#2dd4bf] to-[#1f2937] text-white flex flex-col py-6 px-4 min-h-screen sticky top-0 left-0 z-30"
-      style="height: 100vh; position: sticky; top: 0; overflow-y: auto;">
-      <style>
-        ::-webkit-scrollbar-track {
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-          background-color: #f5f5f5;
-        }
-        ::-webkit-scrollbar {
-          width: 3px;
-          background-color: #f5f5f5;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-          background-color: #f5f5f5;
-        }
-        ::-webkit-scrollbar-thumb {
-          background-color: #32b9a9;
-        }
-      </style>
-      <div class="mb-8 flex items-center gap-2">
-        <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">Grade48</span>
-      </div>
-      <nav class="flex-1 hide-scrollbar" style="overflow-y: auto;">
-        <ul class="space-y-2">
-          <li>
-            <a routerLink="/teacher" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#32b9a9]/30 transition-colors font-medium">
-              <span>🏠</span> <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/teacher/grades" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#32b9a9]/30 transition-colors font-medium">
-              <span>📝</span> <span>Grades</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/teacher/reports" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#32b9a9]/40 font-semibold transition-colors">
-              <span>📊</span> <span>Reports</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="mt-auto">
-        <button class="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 transition-colors font-medium">
-          <span>🚪</span> <span>Logout</span>
-        </button>
-      </div>
-    </aside>
+
     <!-- Main Content Wrapper -->
-    <div class="flex-1 flex flex-col min-h-screen bg-gradient-to-br from-blue-900 via-teal-800 to-slate-900 text-white">
+    <div class="flex-1 flex flex-col min-h-screen  text-white">
       <!-- Navbar -->
-      <nav class="bg-black/30 backdrop-blur-lg border-b border-teal-500/30 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex items-center">
-              <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-                Grade48</span>
-            </div>
-            <div class="flex items-center space-x-4">
-              <a routerLink="/teacher" class="px-4 py-2 rounded-md bg-teal-700 hover:bg-teal-600 transition-all">
-                <span>Dashboard</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+
       
       <!-- Main Content -->
       <main class="py-10">
@@ -84,7 +24,7 @@ template: `
           <!-- Header with animation -->
           <header class="mb-10">
             <h1 class="text-4xl font-black mb-2 animate-fadeIn">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-400">Report Generation</span>
+              <span class="bg-clip-text text-primary-500 ">Report Generation</span>
             </h1>
             <p class="text-gray-300 animate-slideRight">Create and download various reports for your classes and students.</p>
           </header>

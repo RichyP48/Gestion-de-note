@@ -9,67 +9,10 @@ import { SubjectService, Subject } from '../../../core/services/subject.service'
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   template: `
     <div class="min-h-screen bg-white text-gray-900 flex">
-    <!-- Sidebar -->
-    <aside class="w-56 bg-gradient-to-r from-[#2dd4bf] to-[#1f2937]  text-white flex flex-col py-6 px-4 min-h-screen sticky top-0">
-      <div class="mb-8 flex items-center gap-2">
-        <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-400">Grade48</span>
-      </div>
-      <nav class="flex-1">
-        <ul class="space-y-2">
-          <li>
-            <a routerLink="/admin/dashboard" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-              <span>🏠</span> <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/users" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-              <span>🧑‍🤝‍🧑</span> <span>Users</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/subjects" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-700 font-semibold transition-colors">
-              <span>📚</span> <span>Subjects</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/reports" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-              <span>📝</span> <span>Reports</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/settings" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-              <span>⚙️</span> <span>Settings</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="mt-auto">
-        <button (click)="logout()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 transition-colors font-medium">
-          <span>🚪</span> <span>Logout</span>
-        </button>
-      </div>
-    </aside>
+ 
     <!-- Main Content Wrapper -->
     <div class="flex-1 flex flex-col min-h-screen">
-      <!-- Navbar -->
-      <nav class="bg-white border-b border-indigo-100 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex items-center">
-              <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
-                Grade48</span>
-            </div>
-            <div class="flex items-center space-x-4">
-              <button class="px-4 py-2 rounded-md bg-indigo-700 text-white hover:bg-indigo-600 transition-all">
-                <span>Settings</span>
-              </button>
-              <button class="relative h-10 w-10 rounded-full bg-indigo-600 overflow-hidden">
-                <span class="absolute inset-0 flex items-center justify-center font-bold text-xl text-white">A</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+   
 
       <!-- Main Content -->
       <main class="py-10 flex-1">
@@ -77,7 +20,7 @@ import { SubjectService, Subject } from '../../../core/services/subject.service'
           <!-- Header with animation -->
           <header class="mb-10">
             <h1 class="text-4xl font-black mb-2 animate-fadeIn">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-emerald-400">Subject Management</span>
+              <span class="bg-clip-text text-primary-900 ">Subject Management</span>
             </h1>
             <p class="text-gray-500 animate-slideRight">Create and manage subjects in the system.</p>
           </header>

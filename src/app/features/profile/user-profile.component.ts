@@ -12,43 +12,9 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-slate-900 text-white">
+    <div class="min-h-screen  text-gray-500">
     <!-- Navbar -->
-    <nav class="bg-black/30 backdrop-blur-lg border-b border-purple-500/30 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex items-center">
-            <span class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
-              Grade48</span>
-          </div>
-          <div class="ml-6 flex space-x-8 items-center">
-            <a [routerLink]="getDashboardLink()" class="text-white hover:text-purple-200 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-transparent">
-              Dashboard
-            </a>
-          </div>
-          <div class="flex items-center">
-            <!-- Profile dropdown -->
-            <div class="relative ml-3">
-              <div>
-                <button (click)="toggleProfile()" class="flex h-8 w-8 items-center justify-center rounded-full bg-purple-500 text-sm shadow-lg focus:outline-none" aria-expanded="false" aria-haspopup="true">
-                  <span class="sr-only">Open user menu</span>
-                  <span>{{ userInitials }}</span>
-                </button>
-              </div>
-              
-              <!-- Profile dropdown panel -->
-              <div *ngIf="showProfileMenu" 
-                  (mouseleave)="closeProfileMenu()"
-                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div class="block px-4 py-2 text-xs text-gray-700">Signed in as</div>
-                <div class="block px-4 py-2 text-sm text-gray-900 border-b">{{ userEmail }}</div>
-                <button (click)="logout()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+   
     
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -60,7 +26,7 @@ import { Router } from '@angular/router';
       
       <!-- Loading indicator -->
       <div *ngIf="isLoading" class="flex justify-center py-8">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
       </div>
       
       <div *ngIf="!isLoading" class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -77,7 +43,7 @@ import { Router } from '@angular/router';
                   id="firstName" 
                   name="firstName"
                   [(ngModel)]="profile.firstName"
-                  class="bg-black/30 border border-purple-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  class="bg-black/30 border border-primary-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
               </div>
               <div>
@@ -87,7 +53,7 @@ import { Router } from '@angular/router';
                   id="lastName" 
                   name="lastName"
                   [(ngModel)]="profile.lastName"
-                  class="bg-black/30 border border-purple-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  class="bg-black/30 border border-primary-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
               </div>
               <div>
@@ -97,7 +63,7 @@ import { Router } from '@angular/router';
                   id="email" 
                   name="email"
                   [(ngModel)]="profile.email"
-                  class="bg-black/30 border border-purple-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  class="bg-black/30 border border-primary-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
               </div>
               <div>
@@ -108,7 +74,7 @@ import { Router } from '@angular/router';
                   name="username"
                   [(ngModel)]="profile.username"
                   disabled
-                  class="bg-black/30 border border-purple-500/50 text-gray-400 block w-full px-3 py-2 rounded-lg cursor-not-allowed"
+                  class="bg-black/30 border border-primary-500/50 text-gray-400 block w-full px-3 py-2 rounded-lg cursor-not-allowed"
                 >
                 <p class="text-xs text-gray-400 mt-1">Username cannot be changed</p>
               </div>
@@ -128,7 +94,7 @@ import { Router } from '@angular/router';
               <button 
                 type="submit"
                 [disabled]="isProfileSaving"
-                class="flex items-center justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200"
+                class="flex items-center justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200"
               >
                 <span *ngIf="isProfileSaving" class="mr-2">
                   <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -155,7 +121,7 @@ import { Router } from '@angular/router';
                   id="currentPassword" 
                   name="currentPassword"
                   [(ngModel)]="passwordForm.currentPassword"
-                  class="bg-black/30 border border-purple-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  class="bg-black/30 border border-primary-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
               </div>
               <div>
@@ -165,7 +131,7 @@ import { Router } from '@angular/router';
                   id="newPassword" 
                   name="newPassword"
                   [(ngModel)]="passwordForm.newPassword"
-                  class="bg-black/30 border border-purple-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  class="bg-black/30 border border-primary-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
               </div>
               <div>
@@ -175,7 +141,7 @@ import { Router } from '@angular/router';
                   id="confirmPassword" 
                   name="confirmPassword"
                   [(ngModel)]="passwordForm.confirmPassword"
-                  class="bg-black/30 border border-purple-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  class="bg-black/30 border border-primary-500/50 text-white block w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
               </div>
             </div>
@@ -194,7 +160,7 @@ import { Router } from '@angular/router';
               <button 
                 type="submit"
                 [disabled]="isPasswordSaving"
-                class="flex items-center justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200"
+                class="flex items-center justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200"
               >
                 <span *ngIf="isPasswordSaving" class="mr-2">
                   <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

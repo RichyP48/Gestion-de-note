@@ -19,6 +19,7 @@ export const routes: Routes = [
     canActivate: [roleGuard(['ROLE_STUDENT'])],
     loadChildren: () => import('./features/student/student.routes').then(m => m.STUDENT_ROUTES)
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+  { path: 'auth/login', component: LoginComponent },
+  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/auth/login' }
 ];
